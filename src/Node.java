@@ -1,14 +1,26 @@
 
 public class Node {
-	String item;
-	Node next;
+	private String item;
+	private Node next;
 	public Node(){
-		item=  null; 
-		next  = null;
+		setItem(null); 
+		setNext(null);
 	}
 	public Node(String itemA, Node nextA){
-		item = itemA ;
-		next = nextA;
+		setItem(itemA) ;
+		setNext(nextA);
+	}
+	public String getItem() {
+		return item;
+	}
+	public void setItem(String item) {
+		this.item = item;
+	}
+	public Node getNext() {
+		return next;
+	}
+	public void setNext(Node next) {
+		this.next = next;
 	}
 
 }

@@ -91,6 +91,7 @@ public class Assign2 {
 	public static boolean isAnagram(String x, String y) {
 		if(x.length() != y.length())
 			return false;
+		System.out.println("Comparing "+x +" with "+y+".");
 		char[] a = x.toCharArray();
 		char[] b = y.toCharArray();
 		insertionsortChars(a);
@@ -104,7 +105,9 @@ public class Assign2 {
 		File fileIn;
 		Scanner input;
 		LinkedList[] myArray;
-		Integer totalWords = 0;
+		stringVector rawInput;
+		Integer total = 1;
+		String temp;
 		if(args.length != 2) {
 			System.out.println("Incorrect number of inputs. Quitting...");
 			System.exit(-1);
@@ -114,20 +117,21 @@ public class Assign2 {
 			System.exit(-1);
 		}
 		fileIn = new File(args[0]);
+		rawInput = new stringVector();
+		
 		try {
 			input = new Scanner(fileIn);
-			while(input.hasNextLine()){ //while there is still a word left in the text file
-				//line has the line of text file
-				//String line = input.nextLine();
-				System.out.println(input.nextLine());
-				totalWords++;
+			while(input.hasNextLine()){ //while there is still words left in the text file add them to a linkedlist
+				rawInput.addElement(input.nextLine());
 			}
 		}catch(Exception e){
 			System.out.println("Failed to read the text file. Quitting...");
 			System.exit(-1);
 		}
-		String[] tempSarray = new String[totalWords];
-		
-	}
+		for(int i =0;i<rawInput.size();i++) {
+			System.out.println(rawInput.get(i));
+		}
 
+
+	}
 }

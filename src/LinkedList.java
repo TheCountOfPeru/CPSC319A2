@@ -1,41 +1,66 @@
 
 public class LinkedList{
-	private int sizeM;
-    private Node headM;
-    private Node cursorM;
+	private int size;
+    private Node head;
+    private Node cursor;
 			   
     public LinkedList(){
-		sizeM = 0;
-		headM = null;
-		cursorM = null;
+		size = 0;
+		head = null;
+		setCursor(null);
 	}
 	public int size(){
-	  return sizeM;
+	  return size;
+	}
+	public void cursor_to_start() {
+		setCursor(head);
 	}
 	public boolean cursor_ok(){
-	  return cursorM != null;
+	  return getCursor() != null;
 	}
 	public String cursor()   
 	{
 	  assert(cursor_ok());
-	  return cursorM.item; 
+	  return getCursor().getItem(); 
 	}
     public void push_back(String itemA){
     	Node new_node = new Node(itemA, null);
-	  if(headM == null)
-		  headM = new_node;
+	  if(head == null)
+		  head = new_node;
 	  else {
-	      cursorM = headM.next;
-	      Node p = headM;
-	      while (cursorM != null){
-		    cursorM = cursorM.next;
-		    p = p.next;
+	      setCursor(head.getNext());
+	      Node p = head;
+	      while (getCursor() != null){
+		    setCursor(getCursor().getNext());
+		    p = p.getNext();
 	      }
-	      p.next = new_node;
+	      p.setNext(new_node);
        }  
-	   sizeM++;
-     }
-
+	   size++;
+    }
+    public void find(String someString )
+	{
+    	Node ptr= head;
+    	while (ptr!= null && (ptr.getItem().compareTo(someString) > 0 || ptr.getItem().compareTo(someString) < 0))
+		{
+			ptr=ptr.getNext();
+		}
+		cursor = ptr;
+	}
+    public void print()
+	{ 
+	  setCursor(head);
+	  while (getCursor() != null){ 
+		  System.out.println(getCursor().getItem());
+		  setCursor(getCursor().getNext());
+	  }
+	}
+	public Node getCursor() {
+		return cursor;
+	}
+	public void setCursor(Node cursor) {
+		this.cursor = cursor;
+	}
 
 	
 }
