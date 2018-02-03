@@ -91,7 +91,6 @@ public class Assign2 {
 	public static boolean isAnagram(String x, String y) {
 		if(x.length() != y.length())
 			return false;
-		System.out.println("Comparing "+x +" with "+y+".");
 		char[] a = x.toCharArray();
 		char[] b = y.toCharArray();
 		insertionsortChars(a);
@@ -104,10 +103,11 @@ public class Assign2 {
 	public static void main(String[] args) {
 		File fileIn;
 		Scanner input;
-		LinkedList[] myArray;
+		LLVector myArray;
 		stringVector rawInput;
-		Integer total = 1;
-		String temp;
+		String temps;
+		LinkedList templ;
+		int count;
 		if(args.length != 2) {
 			System.out.println("Incorrect number of inputs. Quitting...");
 			System.exit(-1);
@@ -121,17 +121,26 @@ public class Assign2 {
 		
 		try {
 			input = new Scanner(fileIn);
-			while(input.hasNextLine()){ //while there is still words left in the text file add them to a linkedlist
+			while(input.hasNextLine()){ //while there is still words left in the text file add them to a vector of strings
 				rawInput.addElement(input.nextLine());
 			}
 		}catch(Exception e){
 			System.out.println("Failed to read the text file. Quitting...");
 			System.exit(-1);
 		}
-		for(int i =0;i<rawInput.size();i++) {
-			System.out.println(rawInput.get(i));
+		myArray = new LLVector();
+		templ = new LinkedList();
+		
+		temps = rawInput.get(0);
+		templ.push_back(temps);
+		for(int i = 1; i < rawInput.size(); i ++) {			//Find matching anagrams and put them in a linked list
+			if(isAnagram(temps, rawInput.get(i))) {
+				templ.push_back(rawInput.get(i));
+			}
 		}
-
-
+		rawInput.remove(temps);
+		
+		rawInput.print();
+		
 	}
 }

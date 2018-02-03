@@ -1,8 +1,2 @@
 car
 dog
-bed
-stop
-god
-pots
-arc
-tops

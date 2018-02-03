@@ -51,7 +51,7 @@ public class LinkedList{
 	{ 
 	  setCursor(head);
 	  while (getCursor() != null){ 
-		  System.out.println(getCursor().getItem());
+		  System.out.print(getCursor().getItem() + " ");
 		  setCursor(getCursor().getNext());
 	  }
 	}
@@ -61,6 +61,11 @@ public class LinkedList{
 	public void setCursor(Node cursor) {
 		this.cursor = cursor;
 	}
-
+	public void   make_empty()
+	{
+      head = null;
+	  size = 0;
+	  cursor = null;
+	}
 	
 }
