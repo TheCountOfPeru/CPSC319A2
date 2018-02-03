@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -9,6 +10,7 @@ import java.util.Scanner;
 public class Assign2 {
 	private File fileIn;
 	private static Scanner input;
+	private LinkedList<String>[] myArray;
 	/**
 	 * Adapted from https://stackoverflow.com/a/21974043
 	 * @param aString
@@ -32,11 +34,11 @@ public class Assign2 {
 	/*
 	 * Adapted from Data Structures and Algorithms 2nd Edition, Drozdek p.471
 	 */
-	public static void insertionsort(int[] data) {
+	public static void insertionsortChars(char[] data) {
 		int i = 1, j;
 		while(i < data.length) {
 			j = i;
-			int tmp = data[i];
+			char tmp = data[i];
 			while(j > 0 && tmp < data[j-1]) {
 				data[j] = data[j-1];
 			j--;
@@ -83,6 +85,24 @@ public class Assign2 {
 		swap(data,data.length-1,max); 		// largest el is now in its
 		quicksort(data,0,data.length-2); 	// final position;
 		}
+	/**
+	 * Compares two strings to see if they are anagrams of each other.
+	 * @param x The first string
+	 * @param y The second string
+	 * @return Returns true if a and b are anagrams of each other. False otherwise.
+	 */
+	public static boolean isAnagram(String x, String y) {
+		char[] a = x.toCharArray();
+		char[] b = y.toCharArray();
+		insertionsortChars(a);
+		insertionsortChars(b);
+		System.out.println(a);
+		System.out.println(b);
+		if(Arrays.equals(a, b))
+			return true;
+		else 
+			return false;
+	}
 	public static void main(String[] args) {
 		if(args.length != 2) {
 			System.out.println("Incorrect number of inputs. Quitting...");
@@ -104,7 +124,7 @@ public class Assign2 {
 			System.out.println("Failed to read the text file. Quitting...");
 			System.exit(-1);
 		}
-		
+		System.out.println(isAnagram("bal", "lab"));
 
 	}
 
