@@ -8,9 +8,6 @@ import java.util.Scanner;
  *
  */
 public class Assign2 {
-	private File fileIn;
-	private static Scanner input;
-	private LinkedList<String>[] myArray;
 	/**
 	 * Adapted from https://stackoverflow.com/a/21974043
 	 * @param aString
@@ -92,18 +89,22 @@ public class Assign2 {
 	 * @return Returns true if a and b are anagrams of each other. False otherwise.
 	 */
 	public static boolean isAnagram(String x, String y) {
+		if(x.length() != y.length())
+			return false;
 		char[] a = x.toCharArray();
 		char[] b = y.toCharArray();
 		insertionsortChars(a);
 		insertionsortChars(b);
-		System.out.println(a);
-		System.out.println(b);
 		if(Arrays.equals(a, b))
 			return true;
 		else 
 			return false;
 	}
 	public static void main(String[] args) {
+		File fileIn;
+		Scanner input;
+		LinkedList[] myArray;
+		Integer totalWords = 0;
 		if(args.length != 2) {
 			System.out.println("Incorrect number of inputs. Quitting...");
 			System.exit(-1);
@@ -112,20 +113,21 @@ public class Assign2 {
 			System.out.println("Unable to use files that are not text files. Check your file names. Quitting...");
 			System.exit(-1);
 		}
-		File fileIn = new File(args[0]);
+		fileIn = new File(args[0]);
 		try {
 			input = new Scanner(fileIn);
 			while(input.hasNextLine()){ //while there is still a word left in the text file
 				//line has the line of text file
 				//String line = input.nextLine();
 				System.out.println(input.nextLine());
+				totalWords++;
 			}
 		}catch(Exception e){
 			System.out.println("Failed to read the text file. Quitting...");
 			System.exit(-1);
 		}
-		System.out.println(isAnagram("bal", "lab"));
-
+		String[] tempSarray = new String[totalWords];
+		
 	}
 
 }

@@ -1,22 +1,14 @@
 
-public class Node<T> {
-	Integer keyM;
-	T itemM;
-	Node<T> nextM;
-	
-	public Node()
-	{
-		keyM = null;
-		itemM=  null; 
-		nextM  = null;
-	
+public class Node {
+	String item;
+	Node next;
+	public Node(){
+		item=  null; 
+		next  = null;
 	}
-	public Node(T itemA, Integer keyA, Node<T> nextA)
-	
-	{
-		itemM = itemA ;
-		keyM = keyA;
-		nextM = nextA;
+	public Node(String itemA, Node nextA){
+		item = itemA ;
+		next = nextA;
 	}
 
 }
