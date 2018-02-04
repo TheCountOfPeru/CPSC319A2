@@ -102,11 +102,11 @@ public class Assign2 {
 	}
 	public static void main(String[] args) {
 		File fileIn;
-		Scanner input;
+		Scanner scanner;
 		LLVector myArray;
-		stringVector rawInput;
-		String temps;
-		LinkedList templ;
+		stringVector input;
+		stringVector tempVec;
+		String tempstring;
 		int count;
 		if(args.length != 2) {
 			System.out.println("Incorrect number of inputs. Quitting...");
@@ -117,30 +117,40 @@ public class Assign2 {
 			System.exit(-1);
 		}
 		fileIn = new File(args[0]);
-		rawInput = new stringVector();
+		input = new stringVector();
 		
 		try {
-			input = new Scanner(fileIn);
-			while(input.hasNextLine()){ //while there is still words left in the text file add them to a vector of strings
-				rawInput.addElement(input.nextLine());
+			scanner = new Scanner(fileIn);
+			while(scanner.hasNextLine()){ //while there is still words left in the text file add them to a vector of strings
+				input.addElement(scanner.nextLine());
 			}
 		}catch(Exception e){
 			System.out.println("Failed to read the text file. Quitting...");
 			System.exit(-1);
 		}
+		
+		//This part sorts the anagrams into the appropriate linkedlists
 		myArray = new LLVector();
-		templ = new LinkedList();
-		
-		temps = rawInput.get(0);
-		templ.push_back(temps);
-		for(int i = 1; i < rawInput.size(); i ++) {			//Find matching anagrams and put them in a linked list
-			if(isAnagram(temps, rawInput.get(i))) {
-				templ.push_back(rawInput.get(i));
+		int k = 0;		
+		do {												//Go through the input vector and place anagrams into a linked list that is in an array
+			tempVec = new stringVector();					//While going through it place any non-anagrams words into a new vector
+			tempstring = input.get(0);						//assign the new vector back to the input vector at the end.
+			myArray.addElement(new LinkedList());			//Do this until the new vector has a size of 0 which means
+			myArray.get(k).push_back(tempstring);			//there are no more new anagrams to find
+			for (int i = 1; i < input.size(); i++) {
+				if (isAnagram(tempstring, input.get(i)))
+					myArray.get(k).push_back(input.get(i));
+				else
+					tempVec.addElement(input.get(i));
 			}
+			input = tempVec;
+			k++;
+
+		} while (input.size() != 0);
+		
+		for (int i = 0; i < myArray.size(); i++) {
+			myArray.get(i).print();
+			System.out.println();
 		}
-		rawInput.remove(temps);
-		
-		rawInput.print();
-		
 	}
 }

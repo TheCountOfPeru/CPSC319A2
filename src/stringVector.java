@@ -38,26 +38,6 @@ public class stringVector {
 		}
 		words = temp_arr;	
 	}
-	public void remove(String garbage) {
-		int counter = 0;
-		String[] temp_arr;
-		for (int j = 0; j < words.length; j++) {
-			if (garbage.equals(words[j]))
-				counter++;
-		}
-		/*
-		temp_arr = new String[size - counter];
-		for (int i = 0, j = 0; i < words.length; j++) {
-			if (!garbage.equals(words[j])) {
-				temp_arr[i] = words[j];
-				i++;
-			}
-		}
-		size = size - counter;
-		words = temp_arr;
-		*/
-		System.out.println(counter);
-	}
 	public void print() {
 		for (int j = 0; j < words.length; j++) {
 			System.out.print(words[j] + " ");
