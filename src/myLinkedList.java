@@ -39,5 +39,48 @@ public class myLinkedList {
 		for (tmp = head; tmp != null && !tmp.item.equals(el); tmp = tmp.next);
 		return tmp != null;
 	}
-	
+	/**
+	 * Adapted from https://www.programcreek.com/2012/11/leetcode-solution-sort-a-linked-list-using-insertion-sort-in-java/
+	 */
+	public void insertionSort() {
+		//First check if the linkedlist is empty or has only one node
+		if (head == null || head.getNext() == null)
+			return;
+		
+		//We will allocate a new linkedlist and add to it from the old linkedlist except it will sort the items
+		Node newhead = new Node(head.getItem());
+		Node pointer = head.getNext();
+
+		// loop through each element in the list until you get a null node
+		while (pointer != null) {
+			
+			// insert this element to the new list
+			Node innerPointer = newhead;
+			Node next = pointer.getNext();
+			
+			if (pointer.getItem().compareTo(newhead.getItem()) <= 0) {
+				Node oldhead = newhead;
+				newhead = pointer;
+				newhead.setNext(oldhead);
+			}
+			else {
+				while (innerPointer.getNext() != null) {
+					if (pointer.getItem().compareTo(innerPointer.getItem()) > 0 && pointer.getItem().compareTo(innerPointer.getNext().getItem()) <= 0) {
+						Node oldNext = innerPointer.getNext();
+						innerPointer.setNext(pointer);
+						pointer.setNext(oldNext);
+					}
+					innerPointer = innerPointer.getNext();
+				}
+				
+					if(innerPointer.getNext() == null && pointer.getItem().compareTo(innerPointer.getItem()) > 0) {
+						innerPointer.setNext(pointer);
+						pointer.setNext(null);
+					}
+			}
+			// finally
+			pointer = next;	
+		}
+		head = newhead;
+	}
 }

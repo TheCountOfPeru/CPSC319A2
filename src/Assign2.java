@@ -100,6 +100,7 @@ public class Assign2 {
 		else 
 			return false;
 	}
+	
 	public static void main(String[] args) {
 		File fileIn;
 		Scanner scanner;
@@ -147,9 +148,11 @@ public class Assign2 {
 			k++;
 
 		} while (input.size() != 0);
-		//This part sort each linkedlist of each index of the linkedlist array
-		//myArray.get(0).insertionSort();
+		//This part sorts each linkedlist of each index of the linkedlist array
+		
+		
 		for (int i = 0; i < myArray.size(); i++) {
+			myArray.get(i).insertionSort();
 			myArray.get(i).printAll();
 			System.out.println();
 		}

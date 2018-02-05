@@ -13,14 +13,14 @@ public class Node {
 	public String getItem() {
 		return item;
 	}
-	public void setItem(String item) {
-		this.item = item;
+	public void setItem(String itemA) {
+		item = itemA;
 	}
 	public Node getNext() {
 		return next;
 	}
-	public void setNext(Node next) {
-		this.next = next;
+	public void setNext(Node nextA) {
+		next = nextA;
 	}
 
 }

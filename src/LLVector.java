@@ -1,7 +1,7 @@
 
 public class LLVector {
-	private myLinkedList[] lists;
-	private int size;
+	myLinkedList[] lists;
+	int size;
 	
 	public LLVector() {
 		size = 0;
