@@ -147,7 +147,8 @@ public class Assign2 {
 			k++;
 
 		} while (input.size() != 0);
-		
+		//This part sort each linkedlist of each index of the linkedlist array
+		//myArray.get(0).insertionSort();
 		for (int i = 0; i < myArray.size(); i++) {
 			myArray.get(i).print();
 			System.out.println();

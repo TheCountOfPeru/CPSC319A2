@@ -23,6 +23,10 @@ public class LinkedList{
 	  assert(cursor_ok());
 	  return getCursor().getItem(); 
 	}
+	/**
+	 * Puts a new node at the end of a linked list.
+	 * @param itemA
+	 */
     public void push_back(String itemA){
     	Node new_node = new Node(itemA, null);
 	  if(head == null)
@@ -30,7 +34,7 @@ public class LinkedList{
 	  else {
 	      setCursor(head.getNext());
 	      Node p = head;
-	      while (getCursor() != null){
+	      while (getCursor() != null){ 
 		    setCursor(getCursor().getNext());
 		    p = p.getNext();
 	      }
@@ -66,6 +70,45 @@ public class LinkedList{
       head = null;
 	  size = 0;
 	  cursor = null;
+	}
+	public void insertionSort() {
+		if (head == null || head.getNext() == null)
+			return;
+		System.out.println("Sorting...");
+		Node newhead = new Node(head.getItem(), head.getNext());
+		Node pointer = head.getNext();
+		System.out.println(head.getItem());
+		// loop through each element in the list
+		while (head.getNext() != null) {
+			System.out.println("Sorting...");
+			// insert this element to the new list
+			Node innerPointer = newhead;
+			Node next = pointer.getNext();
+			
+			if (pointer.getItem().compareTo(newhead.getItem()) <= 0) {
+				Node oldhead = newhead;
+				newhead = pointer;
+				newhead.setNext(oldhead);
+			}
+			else {
+				while (innerPointer.getNext() != null) {
+					if (pointer.getItem().compareTo(innerPointer.getItem()) > 0 && pointer.getItem().compareTo(innerPointer.getNext().getItem()) <= 0) {
+						Node oldNext = innerPointer.getNext();
+						innerPointer.setNext(pointer);
+						pointer.setNext(oldNext);
+					}
+					innerPointer = innerPointer.getNext();
+					if(innerPointer.getNext() == null && pointer.getItem().compareTo(innerPointer.getItem()) > 0) {
+						innerPointer.setNext(pointer);
+						pointer.setNext(null);
+					}
+				}
+				// finally
+				pointer = next;
+			}
+				
+		}
+		head = newhead;
 	}
 	
 }
