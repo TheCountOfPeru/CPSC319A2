@@ -1,29 +1,29 @@
 
 public class LLVector {
-	private LinkedList[] lists;
+	private myLinkedList[] lists;
 	private int size;
 	
 	public LLVector() {
 		size = 0;
-		lists = new LinkedList[size];
+		lists = new myLinkedList[size];
 	}
 	public int size() {
 		return size;
 	}
-	public LinkedList get(int index) {
+	public myLinkedList get(int index) {
 		return lists[index];
 	}
 	/**
 	 * Adds a new LinkedList to the end of an array of LinkedList.
-	 * @param a
+	 * @param myLinkedList
 	 */
-	public void addElement(LinkedList a) {
-		LinkedList[] temp = new LinkedList[++size];
+	public void addElement(myLinkedList myLinkedList) {
+		myLinkedList[] temp = new myLinkedList[++size];
 		int i = 0;
 		for (; i < lists.length; i++) {
 			temp[i] = lists[i];
 		}
-		temp[i] = a;
+		temp[i] = myLinkedList;
 		lists = temp;
 	}
 	

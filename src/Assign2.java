@@ -135,11 +135,11 @@ public class Assign2 {
 		do {												//Go through the input vector and place anagrams into a linked list that is in an array
 			tempVec = new stringVector();					//While going through it place any non-anagrams words into a new vector
 			tempstring = input.get(0);						//assign the new vector back to the input vector at the end.
-			myArray.addElement(new LinkedList());			//Do this until the new vector has a size of 0 which means
-			myArray.get(k).push_back(tempstring);			//there are no more new anagrams to find
+			myArray.addElement(new myLinkedList());			//Do this until the new vector has a size of 0 which means
+			myArray.get(k).addToTail(tempstring);			//there are no more new anagrams to find
 			for (int i = 1; i < input.size(); i++) {
 				if (isAnagram(tempstring, input.get(i)))
-					myArray.get(k).push_back(input.get(i));
+					myArray.get(k).addToTail(input.get(i));
 				else
 					tempVec.addElement(input.get(i));
 			}
@@ -150,7 +150,7 @@ public class Assign2 {
 		//This part sort each linkedlist of each index of the linkedlist array
 		//myArray.get(0).insertionSort();
 		for (int i = 0; i < myArray.size(); i++) {
-			myArray.get(i).print();
+			myArray.get(i).printAll();
 			System.out.println();
 		}
 	}

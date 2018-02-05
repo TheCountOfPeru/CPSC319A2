@@ -1,9 +1,9 @@
 
 public class Node {
-	private String item;
-	private Node next;
-	public Node(){
-		setItem(null); 
+	String item;
+	Node next;
+	public Node(String i){
+		setItem(i); 
 		setNext(null);
 	}
 	public Node(String itemA, Node nextA){
