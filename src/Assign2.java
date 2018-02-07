@@ -1,4 +1,6 @@
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -86,7 +88,7 @@ public class Assign2 {
 	 * Compares two strings to see if they are anagrams of each other.
 	 * @param x The first string
 	 * @param y The second string
-	 * @return Returns true if a and b are anagrams of each other. False otherwise.
+	 * @return Returns true if a and b contain the exact same characters. False otherwise.
 	 */
 	public static boolean isAnagram(String x, String y) {
 		if(x.length() != y.length())
@@ -108,19 +110,23 @@ public class Assign2 {
 		stringVector input;
 		stringVector tempVec;
 		String tempstring;
-		int count;
+		PrintWriter writer;
+		long startTime; 
+		long elapsedTime;
 		if(args.length != 2) {
 			System.out.println("Incorrect number of inputs. Quitting...");
 			System.exit(-1);
 		}
-		if(!getFileExtension(args[0]).equals(".txt") || !getFileExtension(args[1]).equals(".txt") ) {
+		if(!getFileExtension(args[0]).equals(".txt") || !getFileExtension(args[1]).equals(".txt")) {
 			System.out.println("Unable to use files that are not text files. Check your file names. Quitting...");
 			System.exit(-1);
 		}
 		fileIn = new File(args[0]);
 		input = new stringVector();
 		
+		//This part scans through a given text file and places all the words into a StringVector
 		try {
+			System.out.println("Scanning text file for words...");
 			scanner = new Scanner(fileIn);
 			while(scanner.hasNextLine()){ //while there is still words left in the text file add them to a vector of strings
 				input.addElement(scanner.nextLine());
@@ -130,7 +136,8 @@ public class Assign2 {
 			System.exit(-1);
 		}
 		
-		//This part sorts the anagrams into the appropriate linkedlists
+		//This part sorts the anagrams so that matching anagrams are put together with each other in their own linkedlists
+		System.out.println("Arranging matching anagrams together in linked lists...");
 		myArray = new LLVector();
 		int k = 0;		
 		do {												//Go through the input vector and place anagrams into a linked list that is in an array
@@ -148,13 +155,21 @@ public class Assign2 {
 			k++;
 
 		} while (input.size() != 0);
-		//This part sorts each linkedlist of each index of the linkedlist array
+		//This part sorts each linkedlist of each index of the linkedlist array, then sorts those linkedlists in the array
+		System.out.println("Sorting anagram linkedlists with insertion sort...");
+		myArray.insertionSortAllindex();
 		
-		
-		for (int i = 0; i < myArray.size(); i++) {
-			myArray.get(i).insertionSort();
-			myArray.get(i).printAll();
-			System.out.println();
+		System.out.println("Sorting the linkedlists with quick sort...");
+		myArray.quicksort();
+		try {
+			System.out.println("Writing results to file: "+args[1]);
+			writer = new PrintWriter(args[1]);
+			myArray.printLLVector(writer);
+			writer.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("Unable to access file to print sorted array contents.");
+			e.printStackTrace();
 		}
+		System.out.println("Program complete. Quitting...");
 	}
 }

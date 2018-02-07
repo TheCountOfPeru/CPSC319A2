@@ -1,3 +1,4 @@
+import java.io.PrintWriter;
 
 public class myLinkedList {
 	private Node head;
@@ -30,19 +31,22 @@ public class myLinkedList {
 			head = head.next;
 		return el;
 	}
-	public void printAll() {
+	public void printAll(PrintWriter writer) {
 		for (Node tmp = head; tmp != null; tmp = tmp.next)
-			System.out.print(tmp.item + " ");
+			writer.print(tmp.item + " ");
 	}
 	public boolean isInList(String el) {
 		Node tmp;
 		for (tmp = head; tmp != null && !tmp.item.equals(el); tmp = tmp.next);
 		return tmp != null;
 	}
+	public String getheadItem() {
+		return head.item;
+	}
 	/**
 	 * Adapted from https://www.programcreek.com/2012/11/leetcode-solution-sort-a-linked-list-using-insertion-sort-in-java/
 	 */
-	public void insertionSort() {
+	public void insertionSortLL() {
 		//First check if the linkedlist is empty or has only one node
 		if (head == null || head.getNext() == null)
 			return;
