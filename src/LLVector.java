@@ -43,7 +43,6 @@ public class LLVector {
 		}
 	}
 	public void insertionSortAllindex() {
-
 		for (int i = 0; i < size; i++) {
 			lists[i].insertionSortLL();
 		}
