@@ -12,7 +12,7 @@ public class LLVector {
 	
 	public LLVector() {
 		size = 0;
-		lists = new myLinkedList[size];
+		lists = new myLinkedList[10];
 	}
 	public int size() {
 		return size;
@@ -23,18 +23,23 @@ public class LLVector {
 	public void set(int index, myLinkedList list) {
 		lists[index] = list;
 	}
-	/**
-	 * Adds a new LinkedList to the end of an array of LinkedList.
-	 * @param aLinkedList
-	 */
 	public void addElement(myLinkedList aLinkedList) {
-		myLinkedList[] temp = new myLinkedList[++size];
-		int i = 0;
-		for (; i < lists.length; i++) {
-			temp[i] = lists[i];
+		if(size < lists.length) {
+			lists[size] = aLinkedList;
+			size++;
 		}
-		temp[i] = aLinkedList;
-		lists = temp;
+		else {
+			myLinkedList[] temp = new myLinkedList[2*size];
+			int i = 0;
+			for (; i < lists.length; i++) {
+				temp[i] = lists[i];
+			}
+			temp[i] = aLinkedList;
+			size = lists.length;
+			lists = temp;
+			size++;
+		}
+		
 	}
 	public void printLLVectorFile(PrintWriter writer) {
 		for (int i = 0; i < size; i++) {
