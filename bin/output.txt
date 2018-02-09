@@ -1,4 +1,1 @@
-arc car 
-bed 
-dog god 
-pots stop tops 
+dog bed stop god pots arc tops 

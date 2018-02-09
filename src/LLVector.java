@@ -36,10 +36,16 @@ public class LLVector {
 		temp[i] = aLinkedList;
 		lists = temp;
 	}
-	public void printLLVector(PrintWriter writer) {
+	public void printLLVectorFile(PrintWriter writer) {
 		for (int i = 0; i < size; i++) {
-			lists[i].printAll(writer);
+			lists[i].printAllFile(writer);
 			writer.println();
+		}
+	}
+	public void printLLVectorConsole() {
+		for (int i = 0; i < size; i++) {
+			lists[i].printAllConsole();
+			System.out.println();
 		}
 	}
 	public void insertionSortAllindex() {

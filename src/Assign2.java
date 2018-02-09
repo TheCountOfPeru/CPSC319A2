@@ -65,6 +65,8 @@ public class Assign2 {
 		stringVector tempVec;
 		String tempstring;
 		PrintWriter writer;
+		myLinkedList inputll;
+		Node cursor;
 		long startTime; 
 		long elapsedTime;
 		if(args.length != 2) {
@@ -76,23 +78,62 @@ public class Assign2 {
 			System.exit(-1);
 		}
 		fileIn = new File(args[0]);
-		input = new stringVector();
+		//input = new stringVector();
+		inputll = new myLinkedList();
 		
 		//This part scans through a given text file and places all the words into a StringVector
 		try {
 			System.out.println("Scanning text file for words...");
 			scanner = new Scanner(fileIn);
 			while(scanner.hasNextLine()){ //while there is still words left in the text file add them to a vector of strings
-				input.addElement(scanner.nextLine());
+				//input.addElement(scanner.nextLine());
+				inputll.addToTail(scanner.nextLine());
 			}
 		}catch(Exception e){
 			System.out.println("Failed to read the text file. Quitting...");
 			System.exit(-1);
 		}
-		
+		System.out.println("Printing contents of the input linkedlist.");
+		inputll.printAllConsole();
 		//This part sorts the anagrams so that matching anagrams are put together with each other in their own linkedlists
 		System.out.println("Arranging matching anagrams together in linked lists...");
 		myArray = new LLVector();
+		
+		int k = 0;
+		
+		do {
+			cursor = inputll.getHead(); //Set the cursor to the head.					
+			myArray.addElement(new myLinkedList()); //Initialize new index in the reference array
+			//if(inputll.getTail() == inputll.getHead()) {
+			//	
+			//}
+			inputll.setHead(inputll.getHead().getNext()); //Point head of the first node to the next node.
+			cursor.setNext(null); //Disconnect the first node from the second node.
+			myArray.get(k).setHead(cursor); //Set the head of the selected index of the array to what the cursor is pointing to
+			myArray.get(k).setTail(cursor);
+			tempstring = cursor.getItem(); //Retrieve the item from the node cursor points
+			cursor = inputll.getHead(); //Set cursor to the head of the input vector
+			while (cursor != null) { //Traverse the input vector looking for nodes with anagrams of tempstring
+				if (isAnagram(tempstring, cursor.getItem())) { //When it finds a match move that node to array of references. Continue til you reach
+					if (cursor == inputll.getHead()) {
+						myArray.get(k).append(cursor);
+						inputll.setHead(inputll.getHead().getNext());
+					} 
+					else if(cursor == inputll.getTail()) {
+						 
+					}
+				}
+				cursor = cursor.getNext();
+			}//end of inner while
+			k++;
+		} while (!inputll.isEmpty());
+		System.out.println("Printing contents of the input linkedlist.");
+		inputll.printAllConsole();
+		System.out.println();
+		System.out.println("Printing contents of reference vector.");
+		myArray.printLLVectorConsole();
+		System.out.println("Program complete. Quitting...");
+		/*
 		int k = 0;		
 		do {												//Go through the input vector and place anagrams into a linked list that is in an array
 			tempVec = new stringVector();					//While going through it place any non-anagrams words into a new vector
@@ -109,6 +150,7 @@ public class Assign2 {
 			k++;
 
 		} while (input.size() != 0);
+		
 		//This part sorts each linkedlist of each index of the linkedlist array, then sorts those linkedlists in the array
 		System.out.println("Sorting anagram linkedlists with insertion sort...");
 		myArray.insertionSortAllindex();
@@ -124,6 +166,7 @@ public class Assign2 {
 			System.out.println("Unable to access file to print sorted array contents.");
 			e.printStackTrace();
 		}
-		System.out.println("Program complete. Quitting...");
+		*/
+		//System.out.println("Program complete. Quitting...");
 	}
 }
