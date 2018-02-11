@@ -31,11 +31,10 @@ public class LLVector {
 		else {
 			myLinkedList[] temp = new myLinkedList[2*size];
 			int i = 0;
-			for (; i < lists.length; i++) {
+			for (; i < size; i++) {
 				temp[i] = lists[i];
 			}
 			temp[i] = aLinkedList;
-			size = lists.length;
 			lists = temp;
 			size++;
 		}
@@ -74,10 +73,9 @@ public class LLVector {
 		swap(first,(first+last)/2);
 		String bound = lists[first].getheadItem();
 		while (lower <= upper) {
-				while (bound.compareTo(lists[lower].getheadItem()) > 0) {
+				while (bound.compareTo(lists[lower].getheadItem()) > 0)
 					lower++;
-				}
-				while (bound.compareTo(lists[upper].getheadItem()) < 0) { 
+				while (bound.compareTo(lists[upper].getheadItem()) < 0)
 					upper--;
 				if (lower < upper)
 					swap(lower++,upper--);
@@ -88,7 +86,6 @@ public class LLVector {
 					quicksort(first,upper-1);
 				if (upper+1 < last)
 					quicksort(upper+1,last);
-			}
 		}
 	/*
 	 * Adapted from Data Structures and Algorithms 2nd Edition, Drozdek p.489
@@ -102,7 +99,7 @@ public class LLVector {
 			if (lists[max].getheadItem().compareTo(lists[i].getheadItem()) < 0){
 				max = i;
 			}
-		}
+		} 
 		swap(size-1,max); 		// largest el is now in its
 		quicksort(0,size - 2); 	// final position;
 		}

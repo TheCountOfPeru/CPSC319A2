@@ -64,6 +64,9 @@ public class Assign2 {
 		stringVector input;
 		stringVector tempVec;
 		String tempstring;
+		String t;
+		myLinkedList inputll;
+		myLinkedList templl;
 		PrintWriter writer;
 		long startTime; 
 		long elapsedTime;
@@ -76,14 +79,16 @@ public class Assign2 {
 			System.exit(-1);
 		}
 		fileIn = new File(args[0]);
-		input = new stringVector();
+		//input = new stringVector();
+		inputll = new myLinkedList();
 		startTime = System.nanoTime(); 
 		//This part scans through a given text file and places all the words into a StringVector
 		try {
 			System.out.println("Scanning text file for words...");
 			scanner = new Scanner(fileIn);
 			while(scanner.hasNextLine()){ //while there is still words left in the text file add them to a vector of strings
-				input.addElement(scanner.nextLine());
+				//input.addElement(scanner.nextLine());
+				inputll.addToTail(scanner.nextLine());
 			}
 		}catch(Exception e){
 			System.out.println("Failed to read the text file. Quitting...");
@@ -93,7 +98,24 @@ public class Assign2 {
 		//This part sorts the anagrams so that matching anagrams are put together with each other in their own linkedlists
 		System.out.println("Arranging matching anagrams together in linked lists...");
 		myArray = new LLVector();
-				
+		
+		int k= 0;
+		do {
+			templl = new myLinkedList();
+			tempstring = inputll.deleteFromHead();
+			myArray.addElement(new myLinkedList());
+			myArray.get(k).addToTail(tempstring);
+			while(!inputll.isEmpty()) {
+				t = inputll.deleteFromHead();
+				if(isAnagram(tempstring, t))
+					myArray.get(k).addToTail(t);
+				else
+					templl.addToTail(t);
+			}
+			inputll = templl;
+			k++;
+		}while(!inputll.isEmpty());
+		/*
 		int k = 0;		
 		do {												//Go through the input vector and place anagrams into a linked list that is in an array
 			tempVec = new stringVector();					//While going through it place any non-anagrams words into a new vector
@@ -110,7 +132,7 @@ public class Assign2 {
 			k++;
 
 		} while (input.size() != 0);
-		
+		*/
 		//This part sorts each linkedlist of each index of the linkedlist array, then sorts those linkedlists in the array
 		System.out.println("Sorting anagram linkedlists with insertion sort...");
 		myArray.insertionSortAllindex();
