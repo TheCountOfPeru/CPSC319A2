@@ -80,6 +80,8 @@ public class Assign2 {
 		}
 		fileIn = new File(args[0]);
 		inputll = new myLinkedList();
+		
+		//Timing begins here.
 		startTime = System.nanoTime();
 		//This part scans through a given text file and places all the words into a myLinkedList
 		try {
@@ -141,6 +143,7 @@ public class Assign2 {
 			e.printStackTrace();
 		}
 		elapsedTime = System.nanoTime() - startTime;
+		//Timing stops here
 		System.out.println("Program complete. Running time: " +elapsedTime/1000000000.0+" seconds.");
 		System.out.println("Quitting...");
 		
