@@ -3,17 +3,17 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Scanner;
-
 /**
- * 
+ * This program takes a text file with a list of words and assembles matching anagrams that it finds into linkedlists. Then those linkedlists are connected
+ * to a Vector that contains references to all the lists. It then prints it out.
  * @author Jonathan Yee
- *
+ * @since Feb 12, 2018
  */
 public class Assign2 {
 	/**
 	 * Adapted from https://stackoverflow.com/a/21974043
-	 * @param aString
-	 * @return
+	 * @param aString - The name of a text file.
+	 * @return The file extension if it exists, blank otherwise
 	 */
 	public static String getFileExtension(String aString) {
 	    try {
@@ -61,8 +61,6 @@ public class Assign2 {
 		File fileIn;
 		Scanner scanner;
 		LLVector myArray;
-		stringVector input;
-		stringVector tempVec;
 		String tempstring;
 		String t;
 		myLinkedList inputll;
@@ -70,6 +68,8 @@ public class Assign2 {
 		PrintWriter writer;
 		long startTime; 
 		long elapsedTime;
+		
+		//Command line argument block
 		if(args.length != 2) {
 			System.out.println("Incorrect number of inputs. Quitting...");
 			System.exit(-1);
@@ -79,15 +79,13 @@ public class Assign2 {
 			System.exit(-1);
 		}
 		fileIn = new File(args[0]);
-		//input = new stringVector();
 		inputll = new myLinkedList();
-		startTime = System.nanoTime(); 
-		//This part scans through a given text file and places all the words into a StringVector
+		startTime = System.nanoTime();
+		//This part scans through a given text file and places all the words into a myLinkedList
 		try {
 			System.out.println("Scanning text file for words...");
 			scanner = new Scanner(fileIn);
-			while(scanner.hasNextLine()){ //while there is still words left in the text file add them to a vector of strings
-				//input.addElement(scanner.nextLine());
+			while(scanner.hasNextLine()){ 
 				inputll.addToTail(scanner.nextLine());
 			}
 		}catch(Exception e){
@@ -95,7 +93,14 @@ public class Assign2 {
 			System.exit(-1);
 		}
 
-		//This part sorts the anagrams so that matching anagrams are put together with each other in their own linkedlists
+		
+		/**
+		 * This part sorts the anagrams so that matching anagrams are put together with each other in their own mylinkedlists.
+		 * It does this by parsing the inputll mylinkedlist from above. It takes the first head node as the word it looks for matching anagrams.
+		 * When it finds a match it creates a new node that is for the mylinkedlists in the Vector of mylinkedlists references.
+		 * If the word does not match it is the node data is put in a temporary linked that replaces inputll at the end of the search for anagrams
+		 */
+		
 		System.out.println("Arranging matching anagrams together in linked lists...");
 		myArray = new LLVector();
 		
@@ -115,28 +120,15 @@ public class Assign2 {
 			inputll = templl;
 			k++;
 		}while(!inputll.isEmpty());
+	
 		/*
-		int k = 0;		
-		do {												//Go through the input vector and place anagrams into a linked list that is in an array
-			tempVec = new stringVector();					//While going through it place any non-anagrams words into a new vector
-			tempstring = input.get(0);						//assign the new vector back to the input vector at the end.
-			myArray.addElement(new myLinkedList());			//Do this until the new vector has a size of 0 which means
-			myArray.get(k).addToTail(tempstring);			//there are no more new anagrams to find
-			for (int i = 1; i < input.size(); i++) {
-				if (isAnagram(tempstring, input.get(i)))
-					myArray.get(k).addToTail(input.get(i));
-				else
-					tempVec.addElement(input.get(i));
-			}
-			input = tempVec;
-			k++;
-
-		} while (input.size() != 0);
-		*/
-		//This part sorts each linkedlist of each index of the linkedlist array, then sorts those linkedlists in the array
+		 * This part goes through the vector's mylinkedlists and sorts them.
+		 */
 		System.out.println("Sorting anagram linkedlists with insertion sort...");
 		myArray.insertionSortAllindex();
-		
+		/*
+		 * This part then sorts the vector itself
+		 */
 		System.out.println("Sorting the linkedlists with quick sort...");
 		myArray.quicksort();
 		try {

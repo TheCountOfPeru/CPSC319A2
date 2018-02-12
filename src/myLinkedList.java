@@ -59,15 +59,7 @@ public class myLinkedList {
 	public String getheadItem() {
 		return getHead().item;
 	}
-	public void append(Node addition) {
-		if(head == null) {//When Linkedlist is empty set the addition as the first node
-			head = tail = addition;
-		}
-		else {//When the linkedlist has 1 or more nodes set addition to be after tail and move tail to the new last node.
-			tail.setNext(addition);
-			tail = tail.next;
-		}
-	}
+	
 	/**
 	 * Adapted from https://www.programcreek.com/2012/11/leetcode-solution-sort-a-linked-list-using-insertion-sort-in-java/
 	 */
