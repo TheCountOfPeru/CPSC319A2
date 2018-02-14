@@ -1,7 +1,6 @@
-aimport java.io.PrintWriter;
+import java.io.PrintWriter;
 
 public class LLVector {
-	static int count = 0;
 	/**
 	 * An array of myLinkedLists
 	 */
@@ -38,9 +37,7 @@ public class LLVector {
 			temp[i] = aLinkedList;
 			lists = temp;
 			size++;
-			count++;
 		}
-		System.out.println("Reallocation count: "+ count);
 		
 	}
 	public void printLLVectorFile(PrintWriter writer) {
