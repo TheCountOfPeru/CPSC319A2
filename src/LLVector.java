@@ -4,11 +4,11 @@ public class LLVector {
 	/**
 	 * An array of myLinkedLists
 	 */
-	myLinkedList[] lists;
+	private myLinkedList[] lists;
 	/**
 	 * Size of the array of myLinkedLists
 	 */
-	int size;
+	private int size;
 	
 	public LLVector() {
 		size = 0;

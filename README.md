@@ -1,4 +1,6 @@
 # CPSC319A2
 CPSC319 Assignment 2 UofC
 
-To run this program open of a CMD or Terminal window in the bin directory. Invoke it with the following: java Assign2 [input file] [output file]
+To compile: open a CMD or Terminal window. Change to directory with the .java files. Type "javac Assign2.java" to compile. 
+
+Run the program with the following: java Assign2 [input file] [output file]

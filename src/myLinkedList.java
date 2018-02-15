@@ -17,18 +17,18 @@ public class myLinkedList {
 	}
 	public void addToTail(String el) {
 		if (!isEmpty()) {
-			tail.next = new Node(el);
-			tail = tail.next;
+			tail.setNext(new Node(el));
+			tail = tail.getNext();
 		}
 		else 
 			setHead(tail = new Node(el));
 	}
 	public String deleteFromHead() { // delete the head and return its info;
-			String el = getHead().item;
+			String el = getHead().getItem();
 		if (getHead() == tail) // if only one node on the list;
 			setHead(tail = null);
 		else 
-			setHead(getHead().next);
+			setHead(getHead().getNext());
 		return el;
 	}
 	public Node getHead() {
@@ -44,20 +44,20 @@ public class myLinkedList {
 		this.tail = tail;
 	}
 	public void printAllFile(PrintWriter writer) {
-		for (Node tmp = getHead(); tmp != null; tmp = tmp.next)
-			writer.print(tmp.item + " ");
+		for (Node tmp = getHead(); tmp != null; tmp = tmp.getNext())
+			writer.print(tmp.getItem() + " ");
 	}
 	public void printAllConsole() {
-		for (Node tmp = getHead(); tmp != null; tmp = tmp.next)
-			System.out.print(tmp.item + " ");
+		for (Node tmp = getHead(); tmp != null; tmp = tmp.getNext())
+			System.out.print(tmp.getItem() + " ");
 	}
 	public boolean isInList(String el) {
 		Node tmp;
-		for (tmp = getHead(); tmp != null && !tmp.item.equals(el); tmp = tmp.next);
+		for (tmp = getHead(); tmp != null && !tmp.getItem().equals(el); tmp = tmp.getNext());
 		return tmp != null;
 	}
 	public String getheadItem() {
-		return getHead().item;
+		return getHead().getItem();
 	}
 	
 	/**

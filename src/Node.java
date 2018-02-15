@@ -1,6 +1,6 @@
 public class Node {
-	String item;
-	Node next;
+	private String item;
+	private Node next;
 	public Node(String i){
 		setItem(i); 
 		setNext(null);
